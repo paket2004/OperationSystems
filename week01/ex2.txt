@@ -1,0 +1,136 @@
+    1  su
+    2  cd
+    3  mkdir ~/week01
+    4  cd ~/week01
+    5  grep -r "gcc" | tail -n 5 > ex1.txt
+    6  gedit ex1.txt
+    7  grep -r "gcc"
+    8  grep -r "gcc" /usr/bin | tail -n 5 > ex1.txt
+    9  gedit ex1.txt
+   10  sort -r -o ex1.txt ex1.txt
+   11  ex1.txt
+   12  gedit ex1.txt
+   13  sort -o -r ex1.txt ex1.txt
+   14  gedit ex1.txt
+   15  vim ex1.sh
+   16  sudo apt install vim
+   17  sudo
+   18  sudo apt install vim
+   19  su
+   20  vim ex1.sh
+   21  bash ex1.sh
+   22  gedit ex1.txt
+   23  vim ex1.sh
+   24  ex1.sh
+   25  bash ex1.sh
+   26  gedit ex1.txt
+   27  bim ex1.sh
+   28  vim ex1.sh
+   29  bash ex1.sh
+   30  gedit ex1.txt
+   31  grep -r "gcc" /usr/bin | tail -n 5 > ex1.txt
+   32  gedit ex1.txt
+   33  vim ex1.sh
+   34  bash ex1.sh
+   35  gedit ex1.txt
+   36  rm ex1.txt
+   37  gedit ex1.txt
+   38  vim ex1.sh
+   39  bash ex1.txt
+   40  bash ex1.sh
+   41  gedit ex1.txt
+   42  vim ex1.sh
+   43  bash ex1.sh
+   44  gedit ex1.txt
+   45  vim ex1.sh
+   46  cd ~/week01
+   47  gedot ex1.txt
+   48  gedit ex1.txt
+   49  vim ex1.sh
+   50  cd
+   51  vim ex1.sh
+   52  bash ex1.sh
+   53  cd ~/week01
+   54  gedit ex1.txt
+   55  cd
+   56  vim ex1.sh
+   57  bash ex1.sh
+   58  cd ~/week01
+   59  gedit ex1.txt
+   60  cd
+   61  cd ~/week01
+   62  sort -r -o ex1.txt ex1.txt
+   63  gedit ex1.txt
+   64  sort -o -r ex1.txt ex1.txt
+   65  gedit ex1.txt
+   66  rm ex1.txt
+   67  grep -r "gcc" /usr/bin | tail -n 5 > ex1.txt
+   68  gedit ex1.txt
+   69  sort -r -o ex1.txt ex1.txt
+   70  gedit ex1.txt
+   71  grep -r "gcc" /usr/bin | sort -r | tail -n 5 > ex1.txt
+   72  gedit ex1.txt
+   73  cd
+   74  vim ex1.sh
+   75  cd ~/week01
+   76  rm ex1.txt
+   77  gedit ex1.txt
+   78  cd
+   79  bash ex1.txt
+   80  bash ex1.sh
+   81  cd ~/week01
+   82  gedit ex1.txt
+   83  cd
+   84  vim ex2.sh
+   85  bash ex2.h
+   86  bash ex2.sh
+   87  cd ~/week01
+   88  gedit ex2.txt
+   89  history
+   90  cd
+   91  vim ex2.sh
+   92  bash ex2.sh
+   93  cd ~/week01
+   94  gedit ex2.txt
+   95  history > ~/week01/ex2.txt
+   96  gedit ex2.txt
+   97  rm ex2.txt
+   98  vim ex2.sh
+   99  bash ex2.txt
+  100  bash ex2.sh
+  101  gedit ex2.txt
+  102  vim ex2.sh
+  103  ex2.txt
+  104  gedit ex2.txt
+  105  history > ex2.txt
+  106  gedit ex2.txt
+  107  rm ex2.txt
+  108  vim ex2.sh
+  109  bash ex2.sh
+  110  gedit ex2.sh
+  111  gedit ex2.txt
+  112  gedit ex2.sh
+  113  bash ex2.sh
+  114  gedit ex2.txt
+  115  gedit ex1.txt
+  116  rm ex1.txt
+  117  gedit ex1.txt
+  118  cd
+  119  bash ex1.sh
+  120  cd ~/week01
+  121  gedit ex1.txt
+  122  rm ex2.txt
+  123  cd 
+  124  history > ~/week01/ex2.txt
+  125  cd ~/week01
+  126  gedit ex2.txt
+  127  rm ex2.txt
+  128  cd
+  129  vim ex2.sh
+  130  bash ex2.sh
+  131  cd ~/week01
+  132  gedit ex2.txt
+  133  cd
+  134  bash ex2.sh
+  135  cd ~/week01
+  136  history > ex2.txt

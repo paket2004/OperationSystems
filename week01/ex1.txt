@@ -1,0 +1,5 @@
+/usr/bin/c99-gcc:# The following options are the same (as of gcc-3.3):
+/usr/bin/c99-gcc:exec gcc $extra_flag ${1+"$@"}
+/usr/bin/c89-gcc:# The following options are the same (as of gcc-2.95):
+/usr/bin/c89-gcc:exec gcc $extra_flag ${1+"$@"}
+/usr/bin/bashbug:CC="gcc"

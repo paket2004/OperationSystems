@@ -1,0 +1,17 @@
+Videos
+Templates
+Public
+Pictures
+Music
+Documents
+Desktop
+snap
+Downloads
+ex1.sh
+ex2.sh
+ex2.txt
+week01
+forroot
+test.txt
+forhome
+ex3.sh
