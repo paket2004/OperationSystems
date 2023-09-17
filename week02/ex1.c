@@ -13,13 +13,13 @@ int main() {
     d = FLT_MAX;
     e = DBL_MAX;
 
-    printf("value: %lu", a);
+    printf("value: %d", a);
     printf(" size: %llu\n",sizeof (a));
 
     printf("value: %d", b);
     printf(" size: %llu\n",sizeof (b));
 
-    printf("value: %d", c);
+    printf("value: %ld", c);
     printf(" size: %llu\n",sizeof (c));
 
     printf("value: %f", d);
@@ -30,4 +30,3 @@ int main() {
 
     return 0;
 }
-
