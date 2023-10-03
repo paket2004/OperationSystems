@@ -1,0 +1,2 @@
+1) I run the process for n = 3 and obtain 8 processes. This is because every child process creates new child process on the new step, therefore number of processes is 2 in power of n. In the output we can see name of the process and its ID.
+2) With n equals 5 32 processes will be created, and the same data will be in the input. So, the difference is that input number n influence the number of processes being created and this number is 2^n.
