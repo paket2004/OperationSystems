@@ -16,13 +16,13 @@ int dotProduct(int* u, int* v, int start, int end) {
 
 int main() {
     int n;
-	long long result = 0;
+    long long result = 0;
     printf("Enter the number of processes: ");
     scanf("%d", &n);
 
     int u[120];
     int v[120];
-	int numOfProcesses = 1;
+    int numOfProcesses = 1;
 	
     for (int i = 0; i < 120; i++) {
         u[i] = rand() % 100;
