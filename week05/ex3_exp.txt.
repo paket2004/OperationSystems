@@ -1,0 +1,2 @@
+The speed of the computation increases due to we create same range of numbers using parallel computations.
+And results in the file output doesn't depend on the number of threads, total execution time of the program stays the same
