@@ -45,7 +45,17 @@ int main() {
 
     // Close the PID file
     close(pid_file);
-
+    int text_file = open("text.txt", O_RDONLY);
+    if (text_file == -1) {
+        perror("Failed to open text.txt");
+    } else {
+        char buffer[1024];
+        ssize_t bytes_read;
+        while ((bytes_read = read(text_file, buffer, sizeof(buffer))) > 0) {
+            write(STDOUT_FILENO, buffer, (size_t)bytes_read);
+        }
+        close(text_file);
+    }
     // Register the SIGUSR1 signal handler
     if (signal(SIGUSR1, sigusr1_handler) == SIG_ERR) {
         perror("Failed to register SIGUSR1 handler");
