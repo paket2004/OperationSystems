@@ -1,0 +1,2 @@
+Changing the TRI_BASE to 100 influence the appeared amount of numbers and we spend more time to calculate the results
+If we change the arrival time to zero process just running in increasing order (from 0 to 6), no scheduling techniques used.
