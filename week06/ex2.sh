@@ -1,4 +1,4 @@
 #!/bin/bash
-gcc worker.c
-gcc scheduler.c
-./a.out data.txt
+gcc worker.c -o worker
+gcc scheduler.c -o scheduler
+./scheduler data.txt
