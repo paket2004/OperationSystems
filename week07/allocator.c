@@ -22,7 +22,8 @@ int FirstFit(unsigned int adrs, int size) {
             i++;
         }
         if (block_size >= size) {
-            for (int j = i - block_size; j < i; j++) {
+            i = i - block_size; // Reposition i to the start of the block
+            for (int j = i; j < i + size; j++) {
                 memory[j] = adrs;
             }
             return 1;
