@@ -1,0 +1,17 @@
+Worst fit, file from github:
+
+Total Queries: 54
+Total Allocation Time: 0.928050 seconds
+Throughput: 58.186520 queries per second
+
+First fit, file from github:
+Total Queries: 54
+Total Allocation Time: 0.618671 seconds
+Throughput: 87.283871 queries per second
+
+Best fit, file from github:
+Total Queries: 54
+Total Allocation Time: 0.928685 seconds
+Throughput: 58.146734 queries per second
+
+For this task First fit seems the most appropriate and shows the best throughput.
