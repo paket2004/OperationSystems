@@ -46,10 +46,11 @@ int main() {
         perror("Failed to mmap");
         return 1;
     }
-	strcpy(mmap_pas, password);
-	while(1) {
-		sleep(1);
+strcpy(mmap_pas, password);
+sleep(10);
+while(1) {
+	sleep(1);
 	}
 
-    return 0;
+return 0;
 }
