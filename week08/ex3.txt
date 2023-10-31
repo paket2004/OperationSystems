@@ -1,0 +1,2 @@
+"si" and "so" fields of the table doesn't change before we'll try to allocat really significant amount of memory.
+In my case 0.5 GB per each iteration cause the overflow of the virtual memory on last two iterations. Additionaly, the time of performing of a program increases, because from this moment program need to write to the disk
