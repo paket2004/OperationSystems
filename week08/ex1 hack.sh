@@ -1,10 +1,15 @@
 #!/bin/bash
+gcc ex1.c -o ex1
+./ex1 &
 
-# Find the process ID (PID) of the running "ex1.c" program.
-PID=$(cat /tmp/ex1.pid)
 
-# Load the "ex1.c" program into GDB.
-gdb -q -ex "attach $PID" -ex 'call (void)printf("Password: %s\n",  (char *) $mmap_pas)' -ex "detach" -ex "quit"
+program_pid=$(pgrep -f "./ex1")
 
-# Send a SIGKILL signal to terminate the "ex1.c" program.
-kill -9 $PID
+# Extract the password from the correct program's memory
+heap_line=$(grep "heap" /proc/$program_pid/maps)
+start="0x$(echo "$heap_line" | awk '{print $1}' | cut -d'-' -f1)"
+end="0x$(echo "$heap_line" | awk '{print $1}' | cut-d'-' -f2)"
+xxd -s $start -l $(($end - $start)) /proc/$program_pid/mem | less | grep "pass:"
+
+kill -9 $program_pid
+rm -rf ex1
