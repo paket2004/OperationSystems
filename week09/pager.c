@@ -112,6 +112,62 @@ int nfuAlgo(struct PTE* page_table, int i) {
       				page_reference_count[min_index] = 0;
 	return r;
 }
+
+int* page_reference_count;
+int timer = 0;
+const int TIMER_INTERVAL = 1;
+int agingAlgo(struct PTE* page_table, int i) {
+    int min_count = page_reference_count[0];
+    int min_index = 999;
+
+    if (timer == TIMER_INTERVAL) {
+        for (int i = 0; i < pages_num; i++) {
+            page_reference_count[i] >>= 1;
+
+            if (page_reference_count[i] & 1) {
+                page_reference_count[i] &= ~1;
+            }
+        }
+        timer = 0;
+    }
+
+    for (int i = 0; i < pages_num; i++) {
+        if (page_reference_count[i] < min_count && (page_table[i].frame != -1) && page_table[i].valid != 0) {
+            min_count = page_reference_count[i];
+            min_index = i;
+        }
+    }
+	
+    int r = page_table[min_index].frame;
+    for (int k = 0; k < pages_num; k++) {
+      						if (r == page_table[k].frame) {
+      							if (page_table[k].dirty == 1) {
+      								page_table[k].dirty = 0;
+      								}
+      						strcpy(disk[k],RAM[r]);
+      						page_table[k].frame = -1;
+      						page_table[k].valid = 0;
+      						break;
+      					}
+      				}
+      				
+      				printf("We do not have free frames in RAM\n");
+      				printf("Chose a random victim page %d\n",r);
+      				printf("Replace/Evict it with page %d to be allocated to frame %d\n", i,r);
+      				printf("Copy data from the disk (page = %d) to RAM (frame = %d)",i,r);
+      				strcpy(RAM[r],disk[i]);
+      				page_table[i].valid = 1;
+      				page_table[i].frame = r;
+      				page_reference_count[min_index] = 0;
+    // Update the reference count for the new page
+    page_reference_count[min_index] = 0;
+
+    // Advance the timer
+    timer++;
+
+    return r;
+}
+
 void signalHandler(int signum) {
 	bool finish = false;
 	int index = 0;
@@ -140,6 +196,8 @@ void signalHandler(int signum) {
       					int r = randAlgo(page_table,i);
       				} else if (strcmp("nfu",algorithm) == 0){
       					int r = nfuAlgo(page_table,i);
+      				} else if (strcmp("aging",algorithm) == 0) {
+      					agingAlgo(page_table, i);
       				}
       			
       			}
