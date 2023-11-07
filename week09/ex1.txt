@@ -1,0 +1,10 @@
+For not so big inputs I obtain that hit ratio is the best for the random algorithm. It was unexpected. Anyway, I'm sure only in implementation of the random algorithm, so for the nfu and aging algorithm results may be incorrect.
+I use this sample: 
+5 pages 3 frames
+./pager 5 3
+./mmu 5 R0 R1 R0 W1 R0 R1 R0 W1 R0 R2 R0 W2 R0 R2 R0 W2
+R0 R3 R0 W3 R0 R3 R0 W3 R0 R4 R0 W4 R0 R4 R0 W4
+And obtain:
+Random: 4.5
+nfu: 3.5
+aging: 3.5
