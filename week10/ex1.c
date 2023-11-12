@@ -180,8 +180,7 @@ int main (int argc, char* argv[]) {
     }
     fprintf(filePointer, "Modyfying myfile11.txt");
 
-
-	fileName = "tmp/myfile13.txt\0";
+    fileName = "tmp/myfile13.txt\0";
     fullPathLength = strlen(directoryPath) + strlen(fileName) + 2;
     char* symlink_path = (char*)malloc(fullPathLength);
     snprintf(symlink_path, fullPathLength, "%s/%s", directoryPath, fileName);
@@ -202,5 +201,5 @@ int main (int argc, char* argv[]) {
     printf("----------------\n");
     find_all_hlinks(directoryPath);
     printf("----------------\n");
-	return 0;
+return 0;
 }
