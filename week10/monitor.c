@@ -11,13 +11,11 @@
 #include <time.h>
 #define EVENT_SIZE  (sizeof(struct inotify_event))
 #define BUF_LEN     (1024 * (EVENT_SIZE + 16))
-
 const char* directoryPath;
 int inotifyFd;
 
 void handle_event(struct inotify_event *event) {
     char target[PATH_MAX];
-
     if (event->len > 0) {
         snprintf(target, sizeof(target), "%s/%s", directoryPath, event->name);
     } else {
@@ -83,25 +81,7 @@ void sigint_handler(int signo) {
     close(inotifyFd);
     exit(EXIT_SUCCESS);
 }
-
-int main (int argc, char* argv[]) {
-	if (argc != 2) {
-		printf("Error in input data\n");
-	}
-	inotifyFd = inotify_init();
-    if (inotifyFd == -1) {
-        perror("inotify_init");
-        exit(EXIT_FAILURE);
-    }
-	directoryPath = argv[1];
-	int watchDirectory = inotify_add_watch(inotifyFd, directoryPath, IN_ACCESS | IN_CREATE | IN_DELETE | IN_MODIFY | IN_OPEN | IN_ATTRIB);
-	
-	if (watchDirectory == -1) {
-        perror("inotify_add_watch");
-        exit(EXIT_FAILURE);
-    }
-	printf("Watching directory: %s\n", directoryPath);
-	
+void stat_before() {
 	DIR *dir = opendir(directoryPath);
     if (!dir) {
         perror("opendir");
@@ -126,11 +106,27 @@ int main (int argc, char* argv[]) {
             perror("stat");
         }
     }
+}
 
-    closedir(dir);
+int main (int argc, char* argv[]) {
+	if (argc != 2) {
+		printf("Error in input data\n");
+	}
+	inotifyFd = inotify_init();
+    if (inotifyFd == -1) {
+        perror("inotify_init");
+        exit(EXIT_FAILURE);
+    }
+	directoryPath = argv[1];
+	int watchDirectory = inotify_add_watch(inotifyFd, directoryPath, IN_ACCESS | IN_CREATE | IN_DELETE | IN_MODIFY | IN_OPEN | IN_ATTRIB);
 	
-	
+	if (watchDirectory == -1) {
+        perror("inotify_add_watch");
+        exit(EXIT_FAILURE);
+    }
+	printf("Watching directory: %s\n", directoryPath);
 	signal(SIGINT, sigint_handler);
+	stat_before();
 	while (1) {
         char buffer[BUF_LEN];
         ssize_t bytesRead = read(inotifyFd, buffer, BUF_LEN);
