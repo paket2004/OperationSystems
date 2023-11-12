@@ -3,10 +3,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <sys/mman.h>
-#include <stdbool.h>
-#include <fcntl.h>
-#include <signal.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <dirent.h>
@@ -31,9 +27,7 @@ void find_all_hlinks(const char* source) {
     while ((entry = readdir(dir)) != NULL) {
         if (entry->d_type == DT_REG || entry->d_type == DT_LNK) {
             char* filePath = NULL;
-            //printf("%s\n", entry->d_name);
             asprintf(&filePath, "%s/%s", directoryPath, entry->d_name);
-			//printf("%s\n", filePath);
             struct stat fileInfo;
             if (stat(filePath, &fileInfo) == -1) {
                 perror("Error getting file information");
@@ -84,9 +78,7 @@ void unlink_all(const char* source) {
     while ((entry = readdir(dir)) != NULL) {
         if (entry->d_type == DT_REG || entry->d_type == DT_LNK) {
             char* filePath = NULL;
-            //printf("%s\n", entry->d_name);
             asprintf(&filePath, "%s/%s", directoryPath, entry->d_name);
-			//printf("%s\n", filePath);
             struct stat fileInfo;
             if (stat(filePath, &fileInfo) == -1) {
                 perror("Error getting file information");
@@ -131,13 +123,11 @@ int main (int argc, char* argv[]) {
     }
     
     fprintf(filePointer, "Hello world.");
-    //free(fullPath);
     
     fileName = "myfile11.txt\0";
     fullPathLength = strlen(directoryPath) + strlen(fileName) + 2;
     char* newPath = (char*)malloc(fullPathLength);
     snprintf(newPath, fullPathLength, "%s/%s", directoryPath, fileName);
-    //printf("%s\n",newPath);
     if (access(newPath, F_OK) == 0) {
         // Remove or rename the existing file
         if (remove(newPath) != 0) {
@@ -150,13 +140,12 @@ int main (int argc, char* argv[]) {
     	perror("Error");
     	return 1;
     }
-    
+    printf("Hard link %s created\n", newPath); 
     fileName = "myfile12.txt\0";
     fullPathLength = strlen(directoryPath) + strlen(fileName) + 2;
     char* newPath2 = (char*)malloc(fullPathLength);
     snprintf(newPath2, fullPathLength, "%s/%s", directoryPath, fileName);
-    //printf("%s\n",newPath2);
-   if (access(newPath2, F_OK) == 0) {
+    if (access(newPath2, F_OK) == 0) {
         // Remove or rename the existing file
         if (remove(newPath2) != 0) {
             perror("Error removing existing file");
@@ -168,9 +157,8 @@ int main (int argc, char* argv[]) {
     	perror("Error");
     	return 1;
     }
-    
+    printf("Hard link %s created\n", newPath2);
     find_all_hlinks(fullPath);
-    
     fileName = "tmp/myfile1.txt\0";
     fullPathLength = strlen(directoryPath) + strlen(fileName) + 2;
     char* path_to_remove = (char*)malloc(fullPathLength);
@@ -199,9 +187,7 @@ int main (int argc, char* argv[]) {
     snprintf(symlink_path, fullPathLength, "%s/%s", directoryPath, fileName);
 	Create_sym_link(path_to_remove, symlink_path);
 	
-    
-    
-    fclose(filePointer);
+	fclose(filePointer);
 	filePointer = fopen(path_to_remove, "w");
 	if (filePointer == NULL) {
         printf("Error opening the file.\n");
@@ -209,6 +195,12 @@ int main (int argc, char* argv[]) {
         return 1; // Exit the program with an error code
     }
     fprintf(filePointer, "Modyfying /tmp/myfile1.txt");
+    printf("----------------\n");
+    find_all_hlinks(newPath);
+    printf("----------------\n");
     unlink_all(newPath);
+    printf("----------------\n");
+    find_all_hlinks(directoryPath);
+    printf("----------------\n");
 	return 0;
 }
