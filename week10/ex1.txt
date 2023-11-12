@@ -1,0 +1,6 @@
+Modify the file myfile11.txt.
+Yes, it detects. I think the reason is that we modify the file itsels, therefore there is now way to don't notify system about that.
+Modify the file /tmp/myfile1.txt (its content). Did the monitor.c program reported an event for myfile13.txt?
+No, the program doesn't tell anything. Again, maybe this is due to another location of the file myfile1.txt.
+Remove all duplicates of hard links to myfile11.txt only in the watched directory. After this, print the stat info of the kept hard link. Check the number of hard links and explain the difference.
+I didn't obtain any information. I print out the info before deletion and found only 1 hard link, after that I delete it and now there is no other hard links.   
