@@ -1,0 +1,40 @@
+.
+lost+found
+libs
+ex1
+file2
+file1
+a
+bin
+..
+sbin
+root
+lib32
+lib64
+boot
+init
+lost+found
+home
+tmp
+usr
+lib
+etc
+snap
+.
+proc
+var
+libx32
+..
+mnt
+bin
+media
+dev
+srv
+sys
+run
+opt
+
+Lines 1-9 are obtained by running ex1.c program with changing of the chroot.
+Difference between the outputs is the different root directories for execution of C program. We use chroot to change the root directory to ./lofsdisk. As a result, it sees the content within that directory 
+as if it were the root directory of the filesystem. As an output we obtain a content in chroot environment.
+Without chroot the program just sees the actual root directory of the file system
