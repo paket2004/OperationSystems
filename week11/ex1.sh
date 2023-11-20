@@ -41,23 +41,20 @@ copy_libs_to_lofs() {
 sudo mkdir -p ./lofsdisk/bin
 sudo mkdir -p ./lofsdisk/libs
 
-# Copy shared libraries for specified commands to LOFS directory
-copy_libs_to_lofs "bash"
-copy_libs_to_lofs "cat"
-#copy_libs_to_lofs "echo"
-sudo cp --parents /lib/x86_64-linux-gnu/libc.so.6 "./lofsdisk"
-copy_libs_to_lofs "ls"
+# Copy executables
+sudo cp --parents /usr/bin/{bash,cat,echo,ls} ./
 
-# Step 8: Change the root directory of the process to the mount point of the created LOFS
-sudo cp /bin/bash ./lofsdisk/bin/
-sudo chroot ./lofsdisk /bin/bash -c "gcc -o /bin/ex1 /lofsdisk/ex1.c"
-sudo chroot ./lofsdisk /bin/bash -c "/bin/ex1" > ex1.txt.old
+# Copy dependencies
 
-# Step 9: Run the same program again and append the output to the file ex1.txt
-sudo chroot ./lofsdisk /bin/bash -c "/bin/ex1" >> ex1.txt
+sudo cp /lib/x86_64-linux-gnu/{libtinfo.so.6,libc.so.6,libpcre2-8.so.0,libpthread.so.0} ./lofsdisk/libs/
 
-# Step 10: Display the differences between the outputs and append findings to ex1.txt
-sudo diff ex1.txt ex1.txt.old >> ex1.txt
+sudo cp /lib64/ld-linux-x86-64.so.2 ./lofsdisk/a
+
+gcc ex1.c -o ./lofsdisk/ex1 -static -g -Wall -fsanitize=undefined -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow
+sudo chroot ./lofsdisk /ex1 > ex1.txt
+
+gcc ex1.c -o ./lofsdisk/ex1 -static -g -Wall -fsanitize=undefined -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow
+./lofsdisk/ex1 >> ex1.txt
 
 # Cleanup: Unmount LOFS and detach loop device
 sudo umount ./lofsdisk
