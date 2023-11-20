@@ -2,13 +2,6 @@
 #include <dirent.h>
 
 int main() {
-    // Open the file for writing (this will replace stdout)
-    FILE *file = freopen("ex1.txt", "w", stdout);
-    if (file == NULL) {
-        perror("Error opening file");
-        return 1;
-    }
-
     // Open the root directory
     DIR *dir = opendir("/");
 
@@ -18,7 +11,7 @@ int main() {
         return 1;
     }
 
-    // Read the directory entries
+    // Read the directory entries and print to the console
     struct dirent *entry;
     while ((entry = readdir(dir)) != NULL) {
         printf("%s\n", entry->d_name);
@@ -27,9 +20,5 @@ int main() {
     // Close the directory
     closedir(dir);
 
-    // Close the file (optional, as fclose will also be called on program termination)
-    fclose(file);
-
     return 0;
 }
-
